@@ -1,0 +1,8 @@
+D:\Work\old\Map-Tile-Downloader\OfflineMapDownloader\obj\Debug\net6.0-windows\OfflineMapDownloader.csproj.AssemblyReference.cache
+D:\Work\old\Map-Tile-Downloader\OfflineMapDownloader\obj\Debug\net6.0-windows\OfflineMapDownloader.OfflineTileReaderForm.resources
+D:\Work\old\Map-Tile-Downloader\OfflineMapDownloader\obj\Debug\net6.0-windows\OfflineMapDownloader.Properties.Resources.resources
+D:\Work\old\Map-Tile-Downloader\OfflineMapDownloader\obj\Debug\net6.0-windows\OfflineMapDownloader.csproj.GenerateResource.cache
+D:\Work\old\Map-Tile-Downloader\OfflineMapDownloader\obj\Debug\net6.0-windows\OfflineMapDownloader.GeneratedMSBuildEditorConfig.editorconfig
+D:\Work\old\Map-Tile-Downloader\OfflineMapDownloader\obj\Debug\net6.0-windows\OfflineMapDownloader.AssemblyInfoInputs.cache
+D:\Work\old\Map-Tile-Downloader\OfflineMapDownloader\obj\Debug\net6.0-windows\OfflineMapDownloader.AssemblyInfo.cs
+D:\Work\old\Map-Tile-Downloader\OfflineMapDownloader\obj\Debug\net6.0-windows\OfflineMapDownloader.csproj.CoreCompileInputs.cache

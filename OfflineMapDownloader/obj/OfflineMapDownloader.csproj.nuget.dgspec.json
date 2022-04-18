@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Work\\OfflineMapDownloader\\OfflineMapDownloader\\OfflineMapDownloader.csproj": {}
+    "D:\\Work\\old\\Map-Tile-Downloader\\OfflineMapDownloader\\OfflineMapDownloader.csproj": {}
   },
   "projects": {
-    "D:\\Work\\OfflineMapDownloader\\OfflineMapDownloader\\OfflineMapDownloader.csproj": {
+    "D:\\Work\\old\\Map-Tile-Downloader\\OfflineMapDownloader\\OfflineMapDownloader.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Work\\OfflineMapDownloader\\OfflineMapDownloader\\OfflineMapDownloader.csproj",
+        "projectUniqueName": "D:\\Work\\old\\Map-Tile-Downloader\\OfflineMapDownloader\\OfflineMapDownloader.csproj",
         "projectName": "OfflineMapDownloader",
-        "projectPath": "D:\\Work\\OfflineMapDownloader\\OfflineMapDownloader\\OfflineMapDownloader.csproj",
+        "projectPath": "D:\\Work\\old\\Map-Tile-Downloader\\OfflineMapDownloader\\OfflineMapDownloader.csproj",
         "packagesPath": "C:\\Users\\TIPS-PC06\\.nuget\\packages\\",
-        "outputPath": "D:\\Work\\OfflineMapDownloader\\OfflineMapDownloader\\obj\\",
+        "outputPath": "D:\\Work\\old\\Map-Tile-Downloader\\OfflineMapDownloader\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -22,16 +22,15 @@
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
-          "net5.0-windows7.0"
+          "net6.0-windows7.0"
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Work\\old\\Backend\\EndPoint.WebAPI\\ReportPackages\\stimul-report-nuget": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "net5.0-windows7.0": {
-            "targetAlias": "net5.0-windows",
+          "net6.0-windows7.0": {
+            "targetAlias": "net6.0-windows",
             "projectReferences": {}
           }
         },
@@ -42,9 +41,13 @@
         }
       },
       "frameworks": {
-        "net5.0-windows7.0": {
-          "targetAlias": "net5.0-windows",
+        "net6.0-windows7.0": {
+          "targetAlias": "net6.0-windows",
           "dependencies": {
+            "MongoDB.Driver": {
+              "target": "Package",
+              "version": "[2.15.0, )"
+            },
             "Newtonsoft.Json": {
               "target": "Package",
               "version": "[13.0.1, )"
