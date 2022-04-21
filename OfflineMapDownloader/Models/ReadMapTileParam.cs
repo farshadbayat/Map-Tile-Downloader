@@ -24,7 +24,11 @@ namespace OfflineMapDownloader.Models
         public List<PyramidBound> PyramidBounds { get; set; } = new List<PyramidBound>();
         public string OutputPath { get; set; } = "";
         public string FileExtention { get; set; } = "";
-
+        /// <summary>
+        /// ex: "http://a.tile.openstreetmap.org/{Z}/{X}/{Y}.png"
+        /// https://api.mapbox.com/v4/mapbox.mapbox-streets-v8,mapbox.mapbox-terrain-v2/{Z}/{X}/{Y}.vector.pbf?sku=101xhOEco1UOc&access_token=pk.eyJ1IjoiZmFyc2hhZGJheWF0IiwiYSI6ImNsMXJ6c3dnMzB2bDYzaXB0czA5aTQ0NDYifQ.4I4Bst2KXt42UbjIt4gyWg
+        /// </summary>
+        public string MapUrl { get; set; } = "";
         [JsonIgnore]
         public Action<Task<TileStatus>>? CallbackFunction { get; set; }
         public int Delay { get; set; } = 100;

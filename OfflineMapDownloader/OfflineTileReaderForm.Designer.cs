@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(OfflineTileReaderForm));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.mapUrlTextBox = new System.Windows.Forms.TextBox();
             this.addressFormatTextBox = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -57,7 +57,6 @@
             this.leftBottomLonTextBox = new System.Windows.Forms.TextBox();
             this.leftBottomLatTextBox = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.copyOSMMapButton = new System.Windows.Forms.Button();
             this.rowParamPanel = new System.Windows.Forms.Panel();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.topRightLatTextBox = new System.Windows.Forms.TextBox();
@@ -73,6 +72,7 @@
             this.label17 = new System.Windows.Forms.Label();
             this.cancelAddRowParamButton = new System.Windows.Forms.Button();
             this.addToGridButton = new System.Windows.Forms.Button();
+            this.copyOSMMapButton = new System.Windows.Forms.Button();
             this.addRowParamButton = new System.Windows.Forms.Button();
             this.calculateTotalTileButton = new System.Windows.Forms.Button();
             this.loadConfigButton = new System.Windows.Forms.Button();
@@ -92,12 +92,13 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
-            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.errorLogDataGridView = new System.Windows.Forms.DataGridView();
             this.ColumnErrorRow = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnErrorTileAddress = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnErrorDescription = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnTileUrl = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.statusStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.rowParamPanel.SuspendLayout();
@@ -109,7 +110,7 @@
             this.tabControl1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.tabPage1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorLogDataGridView)).BeginInit();
             this.SuspendLayout();
             // 
             // mapUrlTextBox
@@ -356,8 +357,8 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.copyOSMMapButton);
             this.groupBox1.Controls.Add(this.rowParamPanel);
+            this.groupBox1.Controls.Add(this.copyOSMMapButton);
             this.groupBox1.Controls.Add(this.addRowParamButton);
             this.groupBox1.Controls.Add(this.calculateTotalTileButton);
             this.groupBox1.Controls.Add(this.loadConfigButton);
@@ -373,17 +374,6 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Read From Bounding Box";
             // 
-            // copyOSMMapButton
-            // 
-            this.copyOSMMapButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.copyOSMMapButton.Location = new System.Drawing.Point(455, 267);
-            this.copyOSMMapButton.Name = "copyOSMMapButton";
-            this.copyOSMMapButton.Size = new System.Drawing.Size(106, 42);
-            this.copyOSMMapButton.TabIndex = 29;
-            this.copyOSMMapButton.Text = "Copy OSM Map";
-            this.copyOSMMapButton.UseVisualStyleBackColor = true;
-            this.copyOSMMapButton.Click += new System.EventHandler(this.copyOSMMapButton_Click);
-            // 
             // rowParamPanel
             // 
             this.rowParamPanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
@@ -396,7 +386,7 @@
             this.rowParamPanel.Controls.Add(this.addToGridButton);
             this.rowParamPanel.Location = new System.Drawing.Point(7, 261);
             this.rowParamPanel.Name = "rowParamPanel";
-            this.rowParamPanel.Size = new System.Drawing.Size(47, 156);
+            this.rowParamPanel.Size = new System.Drawing.Size(804, 156);
             this.rowParamPanel.TabIndex = 27;
             this.rowParamPanel.Visible = false;
             // 
@@ -469,7 +459,7 @@
             this.label11.ForeColor = System.Drawing.Color.White;
             this.label11.Location = new System.Drawing.Point(0, 141);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(47, 15);
+            this.label11.Size = new System.Drawing.Size(804, 15);
             this.label11.TabIndex = 25;
             this.label11.Text = "* -85 < Lat < 85          -180  < Lon < 180";
             // 
@@ -543,6 +533,17 @@
             this.addToGridButton.UseVisualStyleBackColor = true;
             this.addToGridButton.Click += new System.EventHandler(this.addToGridButton_Click);
             // 
+            // copyOSMMapButton
+            // 
+            this.copyOSMMapButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.copyOSMMapButton.Location = new System.Drawing.Point(455, 267);
+            this.copyOSMMapButton.Name = "copyOSMMapButton";
+            this.copyOSMMapButton.Size = new System.Drawing.Size(106, 42);
+            this.copyOSMMapButton.TabIndex = 29;
+            this.copyOSMMapButton.Text = "Copy OSM Map";
+            this.copyOSMMapButton.UseVisualStyleBackColor = true;
+            this.copyOSMMapButton.Click += new System.EventHandler(this.copyOSMMapButton_Click);
+            // 
             // addRowParamButton
             // 
             this.addRowParamButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
@@ -589,8 +590,8 @@
             // 
             // pyramidDataGridView
             // 
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.pyramidDataGridView.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.pyramidDataGridView.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle2;
             this.pyramidDataGridView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -707,7 +708,8 @@
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(1163, 459);
-            this.tabControl1.TabIndex = 16;            
+            this.tabControl1.TabIndex = 16;
+            this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.tabControl1_SelectedIndexChanged);
             // 
             // tabPage2
             // 
@@ -722,7 +724,7 @@
             // 
             // tabPage1
             // 
-            this.tabPage1.Controls.Add(this.dataGridView1);
+            this.tabPage1.Controls.Add(this.errorLogDataGridView);
             this.tabPage1.Location = new System.Drawing.Point(4, 24);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
@@ -731,37 +733,34 @@
             this.tabPage1.Text = "Error Log";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
-            // saveFileDialog1
+            // errorLogDataGridView
             // 
-            this.saveFileDialog1.DefaultExt = "mfc";
-            this.saveFileDialog1.FileName = "Map File Config";
-            // 
-            // openFileDialog1
-            // 
-            this.openFileDialog1.DefaultExt = "mfc";
-            this.openFileDialog1.FileName = "Map File Config";
-            // 
-            // dataGridView1
-            // 
-            this.dataGridView1.BackgroundColor = System.Drawing.Color.White;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.errorLogDataGridView.BackgroundColor = System.Drawing.Color.White;
+            this.errorLogDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.errorLogDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ColumnErrorRow,
+            this.ColumnErrorTileAddress,
             this.ColumnErrorDescription,
             this.ColumnTileUrl});
-            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView1.Location = new System.Drawing.Point(3, 3);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowTemplate.Height = 25;
-            this.dataGridView1.Size = new System.Drawing.Size(1149, 425);
-            this.dataGridView1.TabIndex = 0;
+            this.errorLogDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.errorLogDataGridView.Location = new System.Drawing.Point(3, 3);
+            this.errorLogDataGridView.Name = "errorLogDataGridView";
+            this.errorLogDataGridView.RowTemplate.Height = 25;
+            this.errorLogDataGridView.Size = new System.Drawing.Size(1149, 425);
+            this.errorLogDataGridView.TabIndex = 0;
             // 
             // ColumnErrorRow
             // 
             this.ColumnErrorRow.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.ColumnErrorRow.HeaderText = "Row";
             this.ColumnErrorRow.Name = "ColumnErrorRow";
-            this.ColumnErrorRow.Width = 80;
+            this.ColumnErrorRow.Width = 70;
+            // 
+            // ColumnErrorTileAddress
+            // 
+            this.ColumnErrorTileAddress.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.ColumnErrorTileAddress.HeaderText = "Tile ";
+            this.ColumnErrorTileAddress.Name = "ColumnErrorTileAddress";
             // 
             // ColumnErrorDescription
             // 
@@ -774,6 +773,16 @@
             this.ColumnTileUrl.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.ColumnTileUrl.HeaderText = "Tile Url";
             this.ColumnTileUrl.Name = "ColumnTileUrl";
+            // 
+            // saveFileDialog1
+            // 
+            this.saveFileDialog1.DefaultExt = "mfc";
+            this.saveFileDialog1.FileName = "Map File Config";
+            // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.DefaultExt = "mfc";
+            this.openFileDialog1.FileName = "Map File Config";
             // 
             // OfflineTileReaderForm
             // 
@@ -818,7 +827,7 @@
             this.tabControl1.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorLogDataGridView)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -889,8 +898,9 @@
         private System.Windows.Forms.Button addRowParamButton;
         private System.Windows.Forms.Button cancelAddRowParamButton;
         private System.Windows.Forms.Button copyOSMMapButton;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView errorLogDataGridView;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnErrorRow;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnErrorTileAddress;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnErrorDescription;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnTileUrl;
     }

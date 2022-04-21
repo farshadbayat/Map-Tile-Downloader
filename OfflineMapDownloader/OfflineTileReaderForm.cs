@@ -61,6 +61,22 @@ namespace OfflineMapDownloader
             }
         }
 
+        private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            errorLogDataGridView.Rows.Clear();
+            int r = 0;
+            foreach (var error in currentParameters.Log.Where(d => d.Value != ""))
+            {
+                Tile tile = new Tile(error.Key);
+                var endpointUrl = currentParameters.MapUrl
+                .Replace("{Z}", tile.Zoom.ToString(), StringComparison.InvariantCultureIgnoreCase)
+                .Replace("{X}", tile.X.ToString(), StringComparison.InvariantCultureIgnoreCase)
+                .Replace("{Y}", tile.Y.ToString(), StringComparison.InvariantCultureIgnoreCase);
+                
+                errorLogDataGridView.Rows.Add(++r, tile.ToString(), error.Value, endpointUrl);
+            }            
+        }
+
         private void copyOSMMapButton_Click(object sender, EventArgs e)
         {
             try
@@ -117,7 +133,7 @@ namespace OfflineMapDownloader
                         TopRightLon = double.Parse(row.Cells["ColumnTopRightLon"].Value.ToString() ?? "0"),
                         ZoomFrom = int.Parse(row.Cells["ColumnZoomFrom"].Value.ToString() ?? "0"),
                         ZoomTo = int.Parse(row.Cells["ColumnZoomTo"].Value.ToString() ?? "0"),
-                        TotalTile = int.Parse(row.Cells["ColumnTotalTile"].Value.ToString() ?? "0")
+                        TotalTile = int.Parse(row.Cells["ColumnTotalTile"].Value?.ToString() ?? "0")
                     });
                 }
             }
@@ -130,7 +146,8 @@ namespace OfflineMapDownloader
                 FileExtention = extensionTextBox.Text,
                 CallbackFunction = readTileCallback,
                 Delay = int.Parse(delayTextBox.Text),
-                Log = currentParameters?.Log ?? new Dictionary<ulong, string>()
+                Log = currentParameters?.Log ?? new Dictionary<ulong, string>(),
+                MapUrl = mapUrlTextBox.Text
             };
         }
 
@@ -187,9 +204,11 @@ namespace OfflineMapDownloader
             rowParamPanel.Visible = false;
         }
 
-        private void saveConfigButton_Click(object sender, EventArgs e)
+        private async void saveConfigButton_Click(object sender, EventArgs e)
         {
             initMapTileReaderParameters();
+            await mapTileReader.CalculateTotalTile(currentParameters);
+            loadPyramidIntoGrid(currentParameters.PyramidBounds);
             string json = JsonConvert.SerializeObject(currentParameters);
             if(saveFileDialog1.ShowDialog() == DialogResult.OK)
             {
@@ -203,9 +222,18 @@ namespace OfflineMapDownloader
                 string json = File.ReadAllText(openFileDialog1.FileName);
                 File.WriteAllText(saveFileDialog1.FileName, json);
                 currentParameters = JsonConvert.DeserializeObject<ReadMapTileParam>(json) ?? new ReadMapTileParam();
+                outputTextBox.Text = currentParameters.OutputPath;
+                mapProfileComboBox.Text = currentParameters.MapName;
                 currentParameters.CallbackFunction = readTileCallback;
                 pyramidDataGridView.Rows.Clear();
                 loadPyramidIntoGrid(currentParameters.PyramidBounds);
+                if(currentParameters.Log?.Count() > 0)
+                {
+                    if( MessageBox.Show("Download from the beginning?","", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                    {
+                        currentParameters.Log.Clear();
+                    }
+                }
                 startReadButton.Text = currentParameters.Log?.Count() > 0 ? "Resume" : "Start";
             }
         }
@@ -341,7 +369,9 @@ namespace OfflineMapDownloader
             }
         }
 
-       
+        
+
+
 
 
 

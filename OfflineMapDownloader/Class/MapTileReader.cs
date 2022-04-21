@@ -111,7 +111,11 @@ namespace OfflineMapDownloader
 
 		private async Task fetchTileAndSave(Tile tile, ReadMapTileParam param, int current)
         {
-			var endpointUrl = $"http://a.tile.openstreetmap.org/{tile.Zoom}/{tile.X}/{tile.Y}.png";
+			// var endpointUrl = $"http://a.tile.openstreetmap.org/{tile.Zoom}/{tile.X}/{tile.Y}.png";
+			var endpointUrl = param.MapUrl
+				.Replace("{Z}", tile.Zoom.ToString(), StringComparison.InvariantCultureIgnoreCase)
+				.Replace("{X}", tile.X.ToString(), StringComparison.InvariantCultureIgnoreCase)
+				.Replace("{Y}", tile.Y.ToString(), StringComparison.InvariantCultureIgnoreCase);
 			HttpRequestMessage requestMessage = new HttpRequestMessage(HttpMethod.Get, endpointUrl);
 			requestMessage.Headers.Add("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.75 Safari/537.36");
             try
@@ -131,7 +135,6 @@ namespace OfflineMapDownloader
             {
 				param.Log.Add(tile.Id, e?.InnerException?.ToString() ?? "");
 				param.ErrorCount++;
-
 			}
 
 			await semaphoreSlim.WaitAsync();
