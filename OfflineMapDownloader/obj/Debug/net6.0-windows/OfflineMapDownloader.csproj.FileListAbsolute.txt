@@ -70,3 +70,4 @@ W:\Work\Map-Tile-Downloader\OfflineMapDownloader\bin\Debug\net6.0-windows\runtim
 W:\Work\Map-Tile-Downloader\OfflineMapDownloader\obj\Debug\net6.0-windows\OfflineMapDownloader.csproj.CopyComplete
 W:\Work\Map-Tile-Downloader\OfflineMapDownloader\obj\Debug\net6.0-windows\OfflineMapDownloader.genruntimeconfig.cache
 W:\Work\Map-Tile-Downloader\OfflineMapDownloader\obj\Debug\net6.0-windows\ref\OfflineMapDownloader.dll
+W:\Work\Map-Tile-Downloader\OfflineMapDownloader\bin\Debug\net6.0-windows\RestSharp.dll

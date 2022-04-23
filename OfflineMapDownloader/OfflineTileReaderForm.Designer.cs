@@ -478,7 +478,7 @@
             this.copyOSMMapButton.Name = "copyOSMMapButton";
             this.copyOSMMapButton.Size = new System.Drawing.Size(106, 42);
             this.copyOSMMapButton.TabIndex = 29;
-            this.copyOSMMapButton.Text = "Copy OSM Map";
+            this.copyOSMMapButton.Text = "Create Map ";
             this.copyOSMMapButton.UseVisualStyleBackColor = true;
             this.copyOSMMapButton.Click += new System.EventHandler(this.copyOSMMapButton_Click);
             // 
@@ -765,6 +765,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.Name = "OfflineTileReaderForm";
             this.Text = "Map Offline Downloader";
+            this.Load += new System.EventHandler(this.OfflineTileReaderForm_Load);
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             this.groupBox1.ResumeLayout(false);

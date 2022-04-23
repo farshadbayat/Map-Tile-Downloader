@@ -2,6 +2,7 @@
 using AwesomeTiles;
 using Newtonsoft.Json;
 using OfflineMapDownloader.Models;
+using RestSharp;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -34,9 +35,7 @@ namespace OfflineMapDownloader
             foreach (var item in profiles)
             {
                 mapProfileComboBox.Items.Add(item.Name);
-            }
-
-            // mapProfileComboBox.Text = "OSM";
+            }            
             mapProfileComboBox.SelectedIndex = 0;
         }
 
@@ -88,14 +87,21 @@ namespace OfflineMapDownloader
                 {
                     var filePath = outputTextBox.Text;
                     filePath = filePath.ElementAt(filePath.Length - 1) == '\\' ? filePath : filePath + "\\";
-                    File.WriteAllBytes(filePath + "openlayer.zip", Properties.Resources.openlayers);
+                    if(mapProfileComboBox.Text == "OSM")
+                    {
+                        File.WriteAllBytes(filePath + "osm-map.zip", Properties.Resources.osm);
+                    } else if (mapProfileComboBox.Text == "MapBox GL")
+                    {
+                        File.WriteAllBytes(filePath + "mapbox-map.zip", Properties.Resources.map_box);
+                    }
+                        
                 }
             }
             catch (Exception ex)
             {
 
             }
-        }
+        }       
 
         private async void calculateTotalTileButton_Click(object sender, EventArgs e)
         {
@@ -166,7 +172,10 @@ namespace OfflineMapDownloader
                 initMapTileReaderParameters();
                 this.TotalMapTiles = await mapTileReader.CalculateTotalTile(currentParameters);
                 loadPyramidIntoGrid(currentParameters.PyramidBounds);
-                await mapTileReader.ReadMapTiles(currentParameters);
+                do
+                {
+                    await mapTileReader.ReadMapTiles(currentParameters);
+                } while (currentParameters.ErrorCount > 0);
                 taskStarted = false;
                 startReadButton.Text = currentParameters.Log?.Count() > 0 ? "Resume" : "Start";
                 addRowParamButton.Enabled = true;
@@ -182,13 +191,14 @@ namespace OfflineMapDownloader
 
         private async void readTileCallback(Task<TileStatus> obj)
         {
-            int count = (await obj).Count;
+            int count = (await obj).FetchCount;
+            int rps = (await obj).RPS;
             int x = (await obj).Tile?.X ?? 0;
             int y = (await obj).Tile?.Y ?? 0;
             int z = (await obj).Tile?.Zoom ?? 0;
             int error = (await obj).TotalError;
             int percent = (int)(100 * count / this.TotalMapTiles);
-            statusLabel.Text = $"{count:000000} of {this.TotalMapTiles:000000}({percent: 00}%) \t  X:{x:000},Y:{y:000},Z:{z:000} \t Total Error:{error}" ;
+            statusLabel.Text = $"{count:000000} of {this.TotalMapTiles:000000}({percent: 00}%) \t RPS:{rps: 00}  \t  X:{x:000},Y:{y:000},Z:{z:000} \t Total Error:{error}" ;
             readProgressBar.Value = percent;
         }
 
@@ -257,6 +267,28 @@ namespace OfflineMapDownloader
                 );
             }         
         }
+
+        private async Task readTile()
+        {
+            var client = new RestClient("https://api.mapbox.com/v4/mapbox.mapbox-streets-v8,mapbox.mapbox-terrain-v2/0/0/0.vector.pbf?sku=101xhOEco1UOc&access_token=pk.eyJ1IjoiZmFyc2hhZGJheWF0IiwiYSI6ImNsMXJ6c3dnMzB2bDYzaXB0czA5aTQ0NDYifQ.4I4Bst2KXt42UbjIt4gyWg");            
+            var request = new RestRequest()
+            {
+                Method = Method.Get,
+                Timeout = 1_000
+            };            
+            var response = await client.ExecuteAsync(request);
+            if(response.RawBytes != null)
+            {
+                File.WriteAllBytes(@"C:\Users\HomePC\Downloads\0.pbf", response.RawBytes);
+            }            
+        }
+
+        private async void OfflineTileReaderForm_Load(object sender, EventArgs e)
+        {
+            
+        }
+
+        
 
         //private bool addTile(TileAddress tile)
         //{

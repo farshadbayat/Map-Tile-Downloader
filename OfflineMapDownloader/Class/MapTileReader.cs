@@ -2,6 +2,7 @@
 using MongoDB.Driver;
 using Newtonsoft.Json;
 using OfflineMapDownloader.Models;
+using RestSharp;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -24,15 +25,8 @@ namespace OfflineMapDownloader
 		public static string outputPath = "";
 		public static string fileExtention = "png";
 		static SemaphoreSlim semaphoreSlim = new SemaphoreSlim(1, 1);
-
-		private int current = 0;
-
-		static readonly HttpClient _client = new HttpClient
-		{
-			MaxResponseContentBufferSize = 1_000_000
-		};
-		private IMongoDatabase _database = null;
-		
+		static readonly RestClient _client = new RestClient();
+		private IMongoDatabase? _database = null;		
 
 		public Task<int> CalculateTotalTile(ReadMapTileParam param)
         {
@@ -62,7 +56,10 @@ namespace OfflineMapDownloader
         /* https://egorikas.com/download-open-street-tiles-for-offline-using/ */
         public async Task ReadMapTiles(ReadMapTileParam param)
         {
-            foreach (var pyramidBound in param.PyramidBounds)
+			param.FetchCount = 0;
+			param.ErrorCount = 0;
+			param.StartDateTime = DateTime.Now;
+			foreach (var pyramidBound in param.PyramidBounds)
             {
 				for (int zoom = pyramidBound.ZoomFrom; zoom <= pyramidBound.ZoomTo; zoom++)
 				{
@@ -74,8 +71,7 @@ namespace OfflineMapDownloader
 
 					var minY = Math.Min(leftBottom.Y, topRight.Y);
 					var maxY = Math.Max(leftBottom.Y, topRight.Y);
-					var tiles = new TileRange(minX, minY, maxX, maxY, zoom);
-					this.current = 0;
+					var tiles = new TileRange(minX, minY, maxX, maxY, zoom);					
 					List<Task> tasks = new List<Task>();
 					foreach (var tile in tiles)
 					{						
@@ -84,24 +80,18 @@ namespace OfflineMapDownloader
                         {
 							if (param.Log.ContainsKey(tile.Id) == true && param.Log[tile.Id] == "")
 							{
-								this.current++;
+								param.FetchCount++;
 								continue;
 							} else
                             {
-								tasks.Add(fetchTileAndSave(tile, param, current));
-								current++;
+								tasks.Add(fetchTileAndSave(tile, param));
+								param.FetchCount++;
 								/* Parallel with BatchSize Degree */
 								while (tasks.Count > param.BatchSize)
                                 {
 									await Task.WhenAny(tasks);
 									tasks.RemoveAll(t => t.Status == TaskStatus.RanToCompletion);
 								}
-                                /* Batch with BatchSize Windowing */
-                                /* if (tasks.Count % param.BatchSize == 0)
-                                {
-                                    await Task.WhenAll(tasks);
-                                } */
-
                                 if (param.Delay > 0)
 								{
 									await Task.Delay(param.Delay);
@@ -109,13 +99,14 @@ namespace OfflineMapDownloader
 							}							
                         } else
                         {
+							/* Wait to Finished Task */
 							while (tasks.Count > 0)
 							{
 								await Task.WhenAny(tasks);
 								tasks.RemoveAll(t => t.Status == TaskStatus.RanToCompletion);
 							}
 							string json = JsonConvert.SerializeObject(param);
-							File.WriteAllText(param.OutputPath+"history.mfc", json);
+							File.WriteAllText(param.OutputPath + "history.mfc", json);
 							param.IsCancled = false;
 							return;
                         }
@@ -124,8 +115,7 @@ namespace OfflineMapDownloader
 			}            
 		}
 
-
-		private async Task fetchTileAndSave(Tile tile, ReadMapTileParam param, int current)
+		private async Task fetchTileAndSave(Tile tile, ReadMapTileParam param)
         {
 			var endpointUrl = param.MapUrl
 				.Replace("{Z}", tile.Zoom.ToString(), StringComparison.InvariantCultureIgnoreCase)
@@ -135,68 +125,72 @@ namespace OfflineMapDownloader
 			requestMessage.Headers.Add("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.75 Safari/537.36");
             try
             {
-				var response = await _client.SendAsync(requestMessage);
 
-				using (Stream streamToReadFrom = await response.Content.ReadAsStreamAsync())
-				{
+				var request = new RestRequest(endpointUrl, Method.Get);
+				var response = await _client.ExecuteAsync(request);
+				if (response.RawBytes != null)
+				{					
 					if (param.OutputPath != "")
 					{
-						streamToReadFrom.Position = 0;
 						string localFilePath = tile.toLocalFilePath(param.OutputPath, param.FileExtention);
-						using (Stream streamToWriteTo = File.Open(localFilePath, FileMode.Create))
-						{
-							await streamToReadFrom.CopyToAsync(streamToWriteTo);
-							param.Log.Add(tile.Id, String.Empty);
-						}
+						await File.WriteAllBytesAsync(localFilePath, response.RawBytes);						
 					}
 					if (param.MongoDBSetting != "")
-					{
-						streamToReadFrom.Position = 0;
+					{						
 						if (this._database == null)
 						{
 							var mongoParams = param.MongoDBSetting.Split(";");
 							var client = new MongoClient(mongoParams[0]);
 							this._database = client.GetDatabase(mongoParams[1]);
 						}						
-						MemoryStream ms = new MemoryStream();
-						streamToReadFrom.CopyTo(ms);
 						var tilePbf = new TileBsonEntity()
 						{
 							X = tile.X,
 							Y = tile.Y,
 							Z = tile.Zoom,
 							TileID = tile.Id,
-							TilePBF = new MongoDB.Bson.BsonBinaryData(ms.ToArray())
+							TilePBF = new MongoDB.Bson.BsonBinaryData(response.RawBytes)
 						};
 						var collection = _database.GetCollection<TileBsonEntity>("OsmMapPBF");
 						await collection.InsertOneAsync(tilePbf);
 					}
-				}
-				Debug.WriteLine("Complated with Successful" + tile.Id.ToString());
+					param.Log.Add(tile.Id, String.Empty);
+				}				
 			}
             catch (Exception e)
-            {
-				Debug.WriteLine("Complated with Error" + tile.Id.ToString());
-				param.Log.Add(tile.Id, e?.InnerException?.ToString() ?? "");
+            {				
 				param.ErrorCount++;
+				param.Log.Add(tile.Id, e?.InnerException?.ToString() ?? "");
 			}
 
-			await semaphoreSlim.WaitAsync();
-			try
+			int totalSeconds = (int)(DateTime.Now - param.StartDateTime).TotalSeconds;
+			if (param.CallbackFunction != null && totalSeconds > 0)
 			{
-				if (param.CallbackFunction != null)
+				param.CallbackFunction(Task.FromResult(new TileStatus()
 				{
-					param.CallbackFunction(Task.FromResult(new TileStatus() { 
-						 Count = current,						
-						 Tile= tile,
-						 TotalError = param.ErrorCount
-					}));
-				}
+					Tile = tile,
+					FetchCount = param.FetchCount,
+					TotalError = param.ErrorCount,
+					RPS = (int)(param.FetchCount / totalSeconds)
+				}));
 			}
-			finally
-			{
-				semaphoreSlim.Release();
-			}
+
+			//await semaphoreSlim.WaitAsync();
+			//try
+			//{
+			//	if (param.CallbackFunction != null)
+			//	{
+			//		param.CallbackFunction(Task.FromResult(new TileStatus() { 
+			//			 Count = current,						
+			//			 Tile= tile,
+			//			 TotalError = param.ErrorCount
+			//		}));
+			//	}
+			//}
+			//finally
+			//{
+			//	semaphoreSlim.Release();
+			//}
 		}
 
 

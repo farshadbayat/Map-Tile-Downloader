@@ -73,9 +73,19 @@ namespace OfflineMapDownloader.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
-        internal static byte[] openlayers {
+        internal static byte[] map_box {
             get {
-                object obj = ResourceManager.GetObject("openlayers", resourceCulture);
+                object obj = ResourceManager.GetObject("map-box", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] osm {
+            get {
+                object obj = ResourceManager.GetObject("osm", resourceCulture);
                 return ((byte[])(obj));
             }
         }

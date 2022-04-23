@@ -37,13 +37,19 @@ namespace OfflineMapDownloader.Models
         [JsonIgnore]
         public bool IsCancled = false;
         public Dictionary<ulong, string> Log { get; set; } = new Dictionary<ulong, string>();
+        [JsonIgnore]
         public int ErrorCount { get; set; }
+        [JsonIgnore]
+        public int FetchCount { get; set; }
+        [JsonIgnore]
+        public DateTime StartDateTime { get; set; }
     } 
 
     public class TileStatus
     {
         public Tile? Tile { get; set; }
         public int TotalError { get; set; }
-        public int Count { get; set; }        
+        public int FetchCount { get; set; }
+        public int RPS { get; set; }
     }
 }
