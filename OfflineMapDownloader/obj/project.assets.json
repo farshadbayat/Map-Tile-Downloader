@@ -661,24 +661,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\TIPS-PC06\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+    "C:\\Users\\HomePC\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Work\\old\\Map-Tile-Downloader\\OfflineMapDownloader\\OfflineMapDownloader.csproj",
+      "projectUniqueName": "W:\\Work\\Map-Tile-Downloader\\OfflineMapDownloader\\OfflineMapDownloader.csproj",
       "projectName": "OfflineMapDownloader",
-      "projectPath": "D:\\Work\\old\\Map-Tile-Downloader\\OfflineMapDownloader\\OfflineMapDownloader.csproj",
-      "packagesPath": "C:\\Users\\TIPS-PC06\\.nuget\\packages\\",
-      "outputPath": "D:\\Work\\old\\Map-Tile-Downloader\\OfflineMapDownloader\\obj\\",
+      "projectPath": "W:\\Work\\Map-Tile-Downloader\\OfflineMapDownloader\\OfflineMapDownloader.csproj",
+      "packagesPath": "C:\\Users\\HomePC\\.nuget\\packages\\",
+      "outputPath": "W:\\Work\\Map-Tile-Downloader\\OfflineMapDownloader\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-      ],
       "configFilePaths": [
-        "C:\\Users\\TIPS-PC06\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Users\\HomePC\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -686,6 +681,7 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "W:\\Work\\Symbon\\Backend\\packages\\stimul-report-nuget": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {

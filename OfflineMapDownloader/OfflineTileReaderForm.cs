@@ -143,6 +143,7 @@ namespace OfflineMapDownloader
                 MapName = mapProfileComboBox.Text,
                 PyramidBounds = pyramidBounds,
                 OutputPath = outputTextBox.Text,
+                MongoDBSetting = mongoDBTextBox.Text,
                 FileExtention = extensionTextBox.Text,
                 CallbackFunction = readTileCallback,
                 Delay = int.Parse(delayTextBox.Text),
@@ -223,6 +224,8 @@ namespace OfflineMapDownloader
                 File.WriteAllText(saveFileDialog1.FileName, json);
                 currentParameters = JsonConvert.DeserializeObject<ReadMapTileParam>(json) ?? new ReadMapTileParam();
                 outputTextBox.Text = currentParameters.OutputPath;
+                delayTextBox.Text = currentParameters.Delay.ToString();
+                mongoDBTextBox.Text = currentParameters.MongoDBSetting;
                 mapProfileComboBox.Text = currentParameters.MapName;
                 currentParameters.CallbackFunction = readTileCallback;
                 pyramidDataGridView.Rows.Clear();
@@ -254,126 +257,6 @@ namespace OfflineMapDownloader
                 );
             }         
         }
-
-
-
-        /* Old Code */
-
-        private async void button1_Click(object sender, EventArgs e)
-        {
-            MapTileReader.urlFormat = mapUrlTextBox.Text;
-            MapTileReader.outputPath = outputTextBox.Text;
-            MapTileReader.fileExtention = extensionTextBox.Text;
-            for (int i = int.Parse(fromTextBox.Text); i <= int.Parse(toTextBox.Text); i++)
-            {
-                var lines = File.ReadLines(addressFormatTextBox.Text.Replace("{n}", i.ToString())).ToList();
-                List<TileEntity> tileAddresses = new List<TileEntity>();
-                for (int l = 1; l < lines.Count(); l++)
-                {
-                    var items = Regex.Replace(lines[l].Replace(".png:", ""), @"\s+", " ").Split(" ");
-                    var xyz = items[0].Split("/");
-                    tileAddresses.Add(new TileEntity()
-                    {
-                        Z = int.Parse(xyz[0]),
-                        X = int.Parse(xyz[1]),
-                        Y = int.Parse(xyz[2]),
-                        LeftEdgeLongitude = decimal.Parse(items[1]),
-                        RightEdgeLongitude = decimal.Parse(items[2]),
-                        TopEdgeLatitude = decimal.Parse(items[3]),
-                        BottomEdgeLatitude = decimal.Parse(items[4]),
-                    });
-
-                }
-                await fetchTilesAsync(tileAddresses);
-                //var result = await MapTileReader.DownloadUrlsAsync(tileAddresses, int.Parse(maxLimitTextBox.Text));
-                //foreach (var tile in result)
-                //{
-                //    tile.tile.getFileAddress("", "");
-                //}
-            }
-        }
-
-        async Task fetchTilesAsync(List<TileEntity> tileAddresses)
-        {
-            List<TileAddress> errorTile = new List<TileAddress>();
-            foreach (var tileAddress in tileAddresses)
-            {
-                try
-                {
-                    // statusLabel.Text = tileAddress.Z.ToString()+"/"+ tileAddress.X.ToString()+"/"+ tileAddress.Y.ToString();
-                    string url = tileAddress.replaceAddress(urlFormat);
-                    using (var response = await _client.GetAsync(url).ConfigureAwait(false))
-                    {
-                        if (!response.IsSuccessStatusCode)
-                        {
-                            continue;
-                        }
-                        //return (tileAddress, false);
-                        string filePath = tileAddress.getFileAddress(outputPath, fileExtention);
-                        if (Directory.Exists(Path.GetDirectoryName(filePath)) == false)
-                        {
-                            String? directory = Path.GetDirectoryName(filePath);
-                            if (directory != null)
-                            {
-                                Directory.CreateDirectory(Path.GetDirectoryName(filePath) ?? "");
-                            }
-                        }
-                        var data = await response.Content.ReadAsByteArrayAsync().ConfigureAwait(false);
-                        await File.WriteAllBytesAsync(filePath, data);
-                        await Task.Delay(1);
-                    }
-                }
-                catch (Exception x)
-                {
-                    errorTile.Add(tileAddress);
-                }
-            }
-            return;
-
-        }
-
-        private async void button5_Click(object sender, EventArgs e)
-        {
-            var zoom = 10;
-            /* https://egorikas.com/download-open-street-tiles-for-offline-using/ */
-            // 36.65012764798955, 48.44049164708894
-            var leftBottom = Tile.CreateAroundLocation(double.Parse("36.65012764798955"), double.Parse("48.44049164708894"), zoom);
-            // 36.689956293240485, 48.58772807584379
-            var topRight = Tile.CreateAroundLocation(double.Parse("36.689956293240485"), double.Parse("48.58772807584379"), zoom);
-
-            var minX = Math.Min(leftBottom.X, topRight.X);
-            var maxX = Math.Max(leftBottom.X, topRight.X);
-
-            var minY = Math.Min(leftBottom.Y, topRight.Y);
-            var maxY = Math.Max(leftBottom.Y, topRight.Y);
-
-            var tiles = new TileRange(minX, minY, maxX, maxY, zoom);
-            var outputPath = outputTextBox.Text;
-            var fileExtention = extensionTextBox.Text;
-
-            foreach (var tile in tiles)
-            {
-                var endpointUrl = $"http://a.tile.openstreetmap.org/{zoom}/{tile.X}/{tile.Y}.png";
-                HttpRequestMessage requestMessage = new HttpRequestMessage(HttpMethod.Get, endpointUrl);
-                requestMessage.Headers.Add("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.75 Safari/537.36");
-                var response = await _client.SendAsync(requestMessage);
-                using (Stream streamToReadFrom = await response.Content.ReadAsStreamAsync())
-                {
-                    string tileToWriteTo = localFilePath(tile, outputPath, fileExtention);
-                    using (Stream streamToWriteTo = File.Open(tileToWriteTo, FileMode.Create))
-                    {
-                        await streamToReadFrom.CopyToAsync(streamToWriteTo);
-                    }
-                }
-                await Task.Delay(100);
-            }
-        }
-
-        
-
-
-
-
 
         //private bool addTile(TileAddress tile)
         //{

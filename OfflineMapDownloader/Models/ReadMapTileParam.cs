@@ -23,6 +23,7 @@ namespace OfflineMapDownloader.Models
         public string MapName { get; set; } = "";
         public List<PyramidBound> PyramidBounds { get; set; } = new List<PyramidBound>();
         public string OutputPath { get; set; } = "";
+        public string MongoDBSetting { get; set; } = "";
         public string FileExtention { get; set; } = "";
         /// <summary>
         /// ex: "http://a.tile.openstreetmap.org/{Z}/{X}/{Y}.png"

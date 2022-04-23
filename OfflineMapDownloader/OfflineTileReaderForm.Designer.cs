@@ -31,19 +31,13 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(OfflineTileReaderForm));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.mapUrlTextBox = new System.Windows.Forms.TextBox();
-            this.addressFormatTextBox = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.maxLimitTextBox = new System.Windows.Forms.TextBox();
             this.extensionTextBox = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.outputTextBox = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
-            this.fromTextBox = new System.Windows.Forms.TextBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.toTextBox = new System.Windows.Forms.TextBox();
-            this.label7 = new System.Windows.Forms.Label();
             this.mapProfileComboBox = new System.Windows.Forms.ComboBox();
             this.label8 = new System.Windows.Forms.Label();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
@@ -99,6 +93,8 @@
             this.ColumnTileUrl = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.mongoDBTextBox = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
             this.statusStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.rowParamPanel.SuspendLayout();
@@ -117,47 +113,27 @@
             // 
             this.mapUrlTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.mapUrlTextBox.Location = new System.Drawing.Point(97, 574);
+            this.mapUrlTextBox.Location = new System.Drawing.Point(78, 574);
             this.mapUrlTextBox.Name = "mapUrlTextBox";
-            this.mapUrlTextBox.Size = new System.Drawing.Size(1065, 23);
+            this.mapUrlTextBox.Size = new System.Drawing.Size(1097, 23);
             this.mapUrlTextBox.TabIndex = 1;
             this.mapUrlTextBox.Text = resources.GetString("mapUrlTextBox.Text");
-            // 
-            // addressFormatTextBox
-            // 
-            this.addressFormatTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.addressFormatTextBox.Location = new System.Drawing.Point(97, 543);
-            this.addressFormatTextBox.Name = "addressFormatTextBox";
-            this.addressFormatTextBox.Size = new System.Drawing.Size(1065, 23);
-            this.addressFormatTextBox.TabIndex = 2;
-            this.addressFormatTextBox.Text = "D:\\Work\\OfflineMapDownloader\\OfflineMapDownloader\\bin\\data\\Waze-1-15_list{n}.txt";
             // 
             // label1
             // 
             this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(33, 578);
+            this.label1.Location = new System.Drawing.Point(26, 578);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(52, 15);
             this.label1.TabIndex = 3;
             this.label1.Text = "Map Url:";
             // 
-            // label2
-            // 
-            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 547);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(73, 15);
-            this.label2.TabIndex = 3;
-            this.label2.Text = "Address List:";
-            // 
             // label3
             // 
             this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(731, 516);
+            this.label3.Location = new System.Drawing.Point(825, 523);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(79, 15);
             this.label3.TabIndex = 3;
@@ -166,7 +142,7 @@
             // maxLimitTextBox
             // 
             this.maxLimitTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.maxLimitTextBox.Location = new System.Drawing.Point(822, 512);
+            this.maxLimitTextBox.Location = new System.Drawing.Point(910, 519);
             this.maxLimitTextBox.Name = "maxLimitTextBox";
             this.maxLimitTextBox.Size = new System.Drawing.Size(65, 23);
             this.maxLimitTextBox.TabIndex = 2;
@@ -175,7 +151,7 @@
             // extensionTextBox
             // 
             this.extensionTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.extensionTextBox.Location = new System.Drawing.Point(657, 512);
+            this.extensionTextBox.Location = new System.Drawing.Point(764, 519);
             this.extensionTextBox.Name = "extensionTextBox";
             this.extensionTextBox.Size = new System.Drawing.Size(55, 23);
             this.extensionTextBox.TabIndex = 2;
@@ -185,7 +161,7 @@
             // 
             this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(590, 516);
+            this.label4.Location = new System.Drawing.Point(697, 523);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(61, 15);
             this.label4.TabIndex = 3;
@@ -195,9 +171,9 @@
             // 
             this.outputTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.outputTextBox.Location = new System.Drawing.Point(97, 512);
+            this.outputTextBox.Location = new System.Drawing.Point(78, 545);
             this.outputTextBox.Name = "outputTextBox";
-            this.outputTextBox.Size = new System.Drawing.Size(487, 23);
+            this.outputTextBox.Size = new System.Drawing.Size(446, 23);
             this.outputTextBox.TabIndex = 2;
             this.outputTextBox.Text = "c:\\maptile1\\";
             // 
@@ -205,49 +181,11 @@
             // 
             this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(10, 516);
+            this.label5.Location = new System.Drawing.Point(3, 549);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(75, 15);
             this.label5.TabIndex = 3;
             this.label5.Text = "Output Path:";
-            // 
-            // fromTextBox
-            // 
-            this.fromTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.fromTextBox.Location = new System.Drawing.Point(940, 512);
-            this.fromTextBox.Name = "fromTextBox";
-            this.fromTextBox.Size = new System.Drawing.Size(65, 23);
-            this.fromTextBox.TabIndex = 2;
-            this.fromTextBox.Text = "1";
-            // 
-            // label6
-            // 
-            this.label6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(896, 516);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(38, 15);
-            this.label6.TabIndex = 3;
-            this.label6.Text = "From:";
-            // 
-            // toTextBox
-            // 
-            this.toTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.toTextBox.Location = new System.Drawing.Point(1047, 512);
-            this.toTextBox.Name = "toTextBox";
-            this.toTextBox.Size = new System.Drawing.Size(65, 23);
-            this.toTextBox.TabIndex = 2;
-            this.toTextBox.Text = "51";
-            // 
-            // label7
-            // 
-            this.label7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(1019, 516);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(22, 15);
-            this.label7.TabIndex = 3;
-            this.label7.Text = "To:";
             // 
             // mapProfileComboBox
             // 
@@ -255,9 +193,9 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.mapProfileComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.mapProfileComboBox.FormattingEnabled = true;
-            this.mapProfileComboBox.Location = new System.Drawing.Point(97, 478);
+            this.mapProfileComboBox.Location = new System.Drawing.Point(78, 519);
             this.mapProfileComboBox.Name = "mapProfileComboBox";
-            this.mapProfileComboBox.Size = new System.Drawing.Size(487, 23);
+            this.mapProfileComboBox.Size = new System.Drawing.Size(446, 23);
             this.mapProfileComboBox.TabIndex = 5;
             this.mapProfileComboBox.SelectedIndexChanged += new System.EventHandler(this.mapProfileComboBox_SelectedIndexChanged);
             // 
@@ -265,7 +203,7 @@
             // 
             this.label8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(41, 482);
+            this.label8.Location = new System.Drawing.Point(34, 523);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(44, 15);
             this.label8.TabIndex = 3;
@@ -313,7 +251,7 @@
             // startReadButton
             // 
             this.startReadButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.startReadButton.Location = new System.Drawing.Point(343, 267);
+            this.startReadButton.Location = new System.Drawing.Point(343, 309);
             this.startReadButton.Name = "startReadButton";
             this.startReadButton.Size = new System.Drawing.Size(106, 42);
             this.startReadButton.TabIndex = 8;
@@ -369,7 +307,7 @@
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox1.Location = new System.Drawing.Point(3, 3);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(1149, 425);
+            this.groupBox1.Size = new System.Drawing.Size(1161, 467);
             this.groupBox1.TabIndex = 15;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Read From Bounding Box";
@@ -384,9 +322,9 @@
             this.rowParamPanel.Controls.Add(this.groupBox4);
             this.rowParamPanel.Controls.Add(this.cancelAddRowParamButton);
             this.rowParamPanel.Controls.Add(this.addToGridButton);
-            this.rowParamPanel.Location = new System.Drawing.Point(7, 261);
+            this.rowParamPanel.Location = new System.Drawing.Point(7, 303);
             this.rowParamPanel.Name = "rowParamPanel";
-            this.rowParamPanel.Size = new System.Drawing.Size(804, 156);
+            this.rowParamPanel.Size = new System.Drawing.Size(816, 156);
             this.rowParamPanel.TabIndex = 27;
             this.rowParamPanel.Visible = false;
             // 
@@ -459,7 +397,7 @@
             this.label11.ForeColor = System.Drawing.Color.White;
             this.label11.Location = new System.Drawing.Point(0, 141);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(804, 15);
+            this.label11.Size = new System.Drawing.Size(816, 15);
             this.label11.TabIndex = 25;
             this.label11.Text = "* -85 < Lat < 85          -180  < Lon < 180";
             // 
@@ -536,7 +474,7 @@
             // copyOSMMapButton
             // 
             this.copyOSMMapButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.copyOSMMapButton.Location = new System.Drawing.Point(455, 267);
+            this.copyOSMMapButton.Location = new System.Drawing.Point(455, 309);
             this.copyOSMMapButton.Name = "copyOSMMapButton";
             this.copyOSMMapButton.Size = new System.Drawing.Size(106, 42);
             this.copyOSMMapButton.TabIndex = 29;
@@ -547,7 +485,7 @@
             // addRowParamButton
             // 
             this.addRowParamButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.addRowParamButton.Location = new System.Drawing.Point(7, 267);
+            this.addRowParamButton.Location = new System.Drawing.Point(7, 309);
             this.addRowParamButton.Name = "addRowParamButton";
             this.addRowParamButton.Size = new System.Drawing.Size(106, 42);
             this.addRowParamButton.TabIndex = 28;
@@ -558,7 +496,7 @@
             // calculateTotalTileButton
             // 
             this.calculateTotalTileButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.calculateTotalTileButton.Location = new System.Drawing.Point(714, 268);
+            this.calculateTotalTileButton.Location = new System.Drawing.Point(726, 310);
             this.calculateTotalTileButton.Name = "calculateTotalTileButton";
             this.calculateTotalTileButton.Size = new System.Drawing.Size(97, 41);
             this.calculateTotalTileButton.TabIndex = 26;
@@ -569,7 +507,7 @@
             // loadConfigButton
             // 
             this.loadConfigButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.loadConfigButton.Location = new System.Drawing.Point(119, 267);
+            this.loadConfigButton.Location = new System.Drawing.Point(119, 309);
             this.loadConfigButton.Name = "loadConfigButton";
             this.loadConfigButton.Size = new System.Drawing.Size(106, 42);
             this.loadConfigButton.TabIndex = 24;
@@ -580,7 +518,7 @@
             // saveConfigButton
             // 
             this.saveConfigButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.saveConfigButton.Location = new System.Drawing.Point(231, 267);
+            this.saveConfigButton.Location = new System.Drawing.Point(231, 309);
             this.saveConfigButton.Name = "saveConfigButton";
             this.saveConfigButton.Size = new System.Drawing.Size(106, 42);
             this.saveConfigButton.TabIndex = 23;
@@ -610,7 +548,7 @@
             this.pyramidDataGridView.Name = "pyramidDataGridView";
             this.pyramidDataGridView.RowHeadersVisible = false;
             this.pyramidDataGridView.RowTemplate.Height = 25;
-            this.pyramidDataGridView.Size = new System.Drawing.Size(805, 236);
+            this.pyramidDataGridView.Size = new System.Drawing.Size(817, 278);
             this.pyramidDataGridView.TabIndex = 18;
             // 
             // ColumnRow
@@ -671,7 +609,7 @@
             // 
             this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.pictureBox1.Image = global::OfflineMapDownloader.Properties.Resources.grid;
-            this.pictureBox1.Location = new System.Drawing.Point(817, 19);
+            this.pictureBox1.Location = new System.Drawing.Point(829, 19);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(338, 305);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -682,7 +620,7 @@
             // 
             this.label15.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(612, 482);
+            this.label15.Location = new System.Drawing.Point(593, 523);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(39, 15);
             this.label15.TabIndex = 17;
@@ -691,7 +629,7 @@
             // delayTextBox
             // 
             this.delayTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.delayTextBox.Location = new System.Drawing.Point(657, 477);
+            this.delayTextBox.Location = new System.Drawing.Point(633, 519);
             this.delayTextBox.Name = "delayTextBox";
             this.delayTextBox.Size = new System.Drawing.Size(55, 23);
             this.delayTextBox.TabIndex = 16;
@@ -707,7 +645,7 @@
             this.tabControl1.Location = new System.Drawing.Point(0, 12);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1163, 459);
+            this.tabControl1.Size = new System.Drawing.Size(1175, 501);
             this.tabControl1.TabIndex = 16;
             this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.tabControl1_SelectedIndexChanged);
             // 
@@ -717,7 +655,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 24);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(1155, 431);
+            this.tabPage2.Size = new System.Drawing.Size(1167, 473);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Tile Map Downloader";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -728,7 +666,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 24);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(1155, 431);
+            this.tabPage1.Size = new System.Drawing.Size(1167, 473);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Error Log";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -746,7 +684,7 @@
             this.errorLogDataGridView.Location = new System.Drawing.Point(3, 3);
             this.errorLogDataGridView.Name = "errorLogDataGridView";
             this.errorLogDataGridView.RowTemplate.Height = 25;
-            this.errorLogDataGridView.Size = new System.Drawing.Size(1149, 425);
+            this.errorLogDataGridView.Size = new System.Drawing.Size(1161, 467);
             this.errorLogDataGridView.TabIndex = 0;
             // 
             // ColumnErrorRow
@@ -784,6 +722,25 @@
             this.openFileDialog1.DefaultExt = "mfc";
             this.openFileDialog1.FileName = "Map File Config";
             // 
+            // mongoDBTextBox
+            // 
+            this.mongoDBTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.mongoDBTextBox.Location = new System.Drawing.Point(633, 545);
+            this.mongoDBTextBox.Name = "mongoDBTextBox";
+            this.mongoDBTextBox.Size = new System.Drawing.Size(542, 23);
+            this.mongoDBTextBox.TabIndex = 2;
+            this.mongoDBTextBox.Text = "mongodb://localhost:27017;maptile";
+            // 
+            // label6
+            // 
+            this.label6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(528, 549);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(104, 15);
+            this.label6.TabIndex = 3;
+            this.label6.Text = "MongoDB Setting:";
+            // 
             // OfflineTileReaderForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -794,20 +751,16 @@
             this.Controls.Add(this.mapProfileComboBox);
             this.Controls.Add(this.label15);
             this.Controls.Add(this.delayTextBox);
-            this.Controls.Add(this.label7);
-            this.Controls.Add(this.label6);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.label3);
+            this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.toTextBox);
-            this.Controls.Add(this.fromTextBox);
+            this.Controls.Add(this.mongoDBTextBox);
             this.Controls.Add(this.outputTextBox);
             this.Controls.Add(this.maxLimitTextBox);
             this.Controls.Add(this.extensionTextBox);
-            this.Controls.Add(this.addressFormatTextBox);
             this.Controls.Add(this.mapUrlTextBox);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.Name = "OfflineTileReaderForm";
@@ -844,10 +797,6 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox outputTextBox;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox fromTextBox;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TextBox toTextBox;
-        private System.Windows.Forms.Label label7;
         private System.Windows.Forms.ComboBox mapProfileComboBox;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.StatusStrip statusStrip1;
@@ -903,5 +852,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnErrorTileAddress;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnErrorDescription;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnTileUrl;
+        private System.Windows.Forms.TextBox mongoDBTextBox;
+        private System.Windows.Forms.Label label6;
     }
 }

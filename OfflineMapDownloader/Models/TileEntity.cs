@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace OfflineMapDownloader.Models
+﻿namespace OfflineMapDownloader.Models
 {
     public  class TileEntity : TileAddress
     {
@@ -11,6 +6,5 @@ namespace OfflineMapDownloader.Models
         public decimal RightEdgeLongitude { get; set; }
         public decimal TopEdgeLatitude { get; set; }
         public decimal BottomEdgeLatitude { get; set; }
-
     }
 }

@@ -1,8 +1,10 @@
 ﻿using AwesomeTiles;
+using MongoDB.Driver;
 using Newtonsoft.Json;
 using OfflineMapDownloader.Models;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
@@ -29,6 +31,8 @@ namespace OfflineMapDownloader
 		{
 			MaxResponseContentBufferSize = 1_000_000
 		};
+		private IMongoDatabase _database = null;
+		
 
 		public Task<int> CalculateTotalTile(ReadMapTileParam param)
         {
@@ -86,18 +90,30 @@ namespace OfflineMapDownloader
                             {
 								tasks.Add(fetchTileAndSave(tile, param, current));
 								current++;
-								if (tasks.Count % param.BatchSize == 0)
-								{
-									await Task.WhenAll(tasks);
+								/* Parallel with BatchSize Degree */
+								while (tasks.Count > param.BatchSize)
+                                {
+									await Task.WhenAny(tasks);
+									tasks.RemoveAll(t => t.Status == TaskStatus.RanToCompletion);
 								}
+                                /* Batch with BatchSize Windowing */
+                                /* if (tasks.Count % param.BatchSize == 0)
+                                {
+                                    await Task.WhenAll(tasks);
+                                } */
 
-								if (param.Delay > 0)
+                                if (param.Delay > 0)
 								{
 									await Task.Delay(param.Delay);
 								}
 							}							
                         } else
                         {
+							while (tasks.Count > 0)
+							{
+								await Task.WhenAny(tasks);
+								tasks.RemoveAll(t => t.Status == TaskStatus.RanToCompletion);
+							}
 							string json = JsonConvert.SerializeObject(param);
 							File.WriteAllText(param.OutputPath+"history.mfc", json);
 							param.IsCancled = false;
@@ -111,7 +127,6 @@ namespace OfflineMapDownloader
 
 		private async Task fetchTileAndSave(Tile tile, ReadMapTileParam param, int current)
         {
-			// var endpointUrl = $"http://a.tile.openstreetmap.org/{tile.Zoom}/{tile.X}/{tile.Y}.png";
 			var endpointUrl = param.MapUrl
 				.Replace("{Z}", tile.Zoom.ToString(), StringComparison.InvariantCultureIgnoreCase)
 				.Replace("{X}", tile.X.ToString(), StringComparison.InvariantCultureIgnoreCase)
@@ -121,18 +136,47 @@ namespace OfflineMapDownloader
             try
             {
 				var response = await _client.SendAsync(requestMessage);
+
 				using (Stream streamToReadFrom = await response.Content.ReadAsStreamAsync())
 				{
-					string localFilePath = tile.toLocalFilePath(param.OutputPath, param.FileExtention);
-					using (Stream streamToWriteTo = File.Open(localFilePath, FileMode.Create))
+					if (param.OutputPath != "")
 					{
-						await streamToReadFrom.CopyToAsync(streamToWriteTo);
-						param.Log.Add(tile.Id, String.Empty);
+						streamToReadFrom.Position = 0;
+						string localFilePath = tile.toLocalFilePath(param.OutputPath, param.FileExtention);
+						using (Stream streamToWriteTo = File.Open(localFilePath, FileMode.Create))
+						{
+							await streamToReadFrom.CopyToAsync(streamToWriteTo);
+							param.Log.Add(tile.Id, String.Empty);
+						}
+					}
+					if (param.MongoDBSetting != "")
+					{
+						streamToReadFrom.Position = 0;
+						if (this._database == null)
+						{
+							var mongoParams = param.MongoDBSetting.Split(";");
+							var client = new MongoClient(mongoParams[0]);
+							this._database = client.GetDatabase(mongoParams[1]);
+						}						
+						MemoryStream ms = new MemoryStream();
+						streamToReadFrom.CopyTo(ms);
+						var tilePbf = new TileBsonEntity()
+						{
+							X = tile.X,
+							Y = tile.Y,
+							Z = tile.Zoom,
+							TileID = tile.Id,
+							TilePBF = new MongoDB.Bson.BsonBinaryData(ms.ToArray())
+						};
+						var collection = _database.GetCollection<TileBsonEntity>("OsmMapPBF");
+						await collection.InsertOneAsync(tilePbf);
 					}
 				}
+				Debug.WriteLine("Complated with Successful" + tile.Id.ToString());
 			}
             catch (Exception e)
             {
+				Debug.WriteLine("Complated with Error" + tile.Id.ToString());
 				param.Log.Add(tile.Id, e?.InnerException?.ToString() ?? "");
 				param.ErrorCount++;
 			}
