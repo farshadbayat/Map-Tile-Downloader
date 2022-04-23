@@ -1,0 +1,78 @@
+C:\Users\TIPS-PC06\source\repos\OfflineMapDownloader\OfflineMapDownloader\bin\Debug\net5.0-windows\OfflineMapDownloader.exe
+C:\Users\TIPS-PC06\source\repos\OfflineMapDownloader\OfflineMapDownloader\bin\Debug\net5.0-windows\OfflineMapDownloader.deps.json
+C:\Users\TIPS-PC06\source\repos\OfflineMapDownloader\OfflineMapDownloader\bin\Debug\net5.0-windows\OfflineMapDownloader.runtimeconfig.json
+C:\Users\TIPS-PC06\source\repos\OfflineMapDownloader\OfflineMapDownloader\bin\Debug\net5.0-windows\OfflineMapDownloader.runtimeconfig.dev.json
+C:\Users\TIPS-PC06\source\repos\OfflineMapDownloader\OfflineMapDownloader\bin\Debug\net5.0-windows\OfflineMapDownloader.dll
+C:\Users\TIPS-PC06\source\repos\OfflineMapDownloader\OfflineMapDownloader\bin\Debug\net5.0-windows\OfflineMapDownloader.pdb
+C:\Users\TIPS-PC06\source\repos\OfflineMapDownloader\OfflineMapDownloader\obj\Debug\net5.0-windows\OfflineMapDownloader.csproj.AssemblyReference.cache
+C:\Users\TIPS-PC06\source\repos\OfflineMapDownloader\OfflineMapDownloader\obj\Debug\net5.0-windows\OfflineMapDownloader.Form1.resources
+C:\Users\TIPS-PC06\source\repos\OfflineMapDownloader\OfflineMapDownloader\obj\Debug\net5.0-windows\OfflineMapDownloader.csproj.GenerateResource.cache
+C:\Users\TIPS-PC06\source\repos\OfflineMapDownloader\OfflineMapDownloader\obj\Debug\net5.0-windows\OfflineMapDownloader.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\TIPS-PC06\source\repos\OfflineMapDownloader\OfflineMapDownloader\obj\Debug\net5.0-windows\OfflineMapDownloader.AssemblyInfoInputs.cache
+C:\Users\TIPS-PC06\source\repos\OfflineMapDownloader\OfflineMapDownloader\obj\Debug\net5.0-windows\OfflineMapDownloader.AssemblyInfo.cs
+C:\Users\TIPS-PC06\source\repos\OfflineMapDownloader\OfflineMapDownloader\obj\Debug\net5.0-windows\OfflineMapDownloader.csproj.CoreCompileInputs.cache
+C:\Users\TIPS-PC06\source\repos\OfflineMapDownloader\OfflineMapDownloader\obj\Debug\net5.0-windows\OfflineMapDownloader.dll
+C:\Users\TIPS-PC06\source\repos\OfflineMapDownloader\OfflineMapDownloader\obj\Debug\net5.0-windows\refint\OfflineMapDownloader.dll
+C:\Users\TIPS-PC06\source\repos\OfflineMapDownloader\OfflineMapDownloader\obj\Debug\net5.0-windows\OfflineMapDownloader.pdb
+C:\Users\TIPS-PC06\source\repos\OfflineMapDownloader\OfflineMapDownloader\obj\Debug\net5.0-windows\OfflineMapDownloader.genruntimeconfig.cache
+C:\Users\TIPS-PC06\source\repos\OfflineMapDownloader\OfflineMapDownloader\obj\Debug\net5.0-windows\ref\OfflineMapDownloader.dll
+C:\Work\old\OfflineMapDownloader\OfflineMapDownloader\bin\Debug\net5.0-windows\OfflineMapDownloader.exe
+C:\Work\old\OfflineMapDownloader\OfflineMapDownloader\bin\Debug\net5.0-windows\OfflineMapDownloader.deps.json
+C:\Work\old\OfflineMapDownloader\OfflineMapDownloader\bin\Debug\net5.0-windows\OfflineMapDownloader.runtimeconfig.json
+C:\Work\old\OfflineMapDownloader\OfflineMapDownloader\bin\Debug\net5.0-windows\OfflineMapDownloader.runtimeconfig.dev.json
+C:\Work\old\OfflineMapDownloader\OfflineMapDownloader\bin\Debug\net5.0-windows\OfflineMapDownloader.dll
+C:\Work\old\OfflineMapDownloader\OfflineMapDownloader\bin\Debug\net5.0-windows\ref\OfflineMapDownloader.dll
+C:\Work\old\OfflineMapDownloader\OfflineMapDownloader\bin\Debug\net5.0-windows\OfflineMapDownloader.pdb
+C:\Work\old\OfflineMapDownloader\OfflineMapDownloader\obj\Debug\net5.0-windows\OfflineMapDownloader.csproj.AssemblyReference.cache
+C:\Work\old\OfflineMapDownloader\OfflineMapDownloader\obj\Debug\net5.0-windows\OfflineMapDownloader.Form1.resources
+C:\Work\old\OfflineMapDownloader\OfflineMapDownloader\obj\Debug\net5.0-windows\OfflineMapDownloader.csproj.GenerateResource.cache
+C:\Work\old\OfflineMapDownloader\OfflineMapDownloader\obj\Debug\net5.0-windows\OfflineMapDownloader.GeneratedMSBuildEditorConfig.editorconfig
+C:\Work\old\OfflineMapDownloader\OfflineMapDownloader\obj\Debug\net5.0-windows\OfflineMapDownloader.AssemblyInfoInputs.cache
+C:\Work\old\OfflineMapDownloader\OfflineMapDownloader\obj\Debug\net5.0-windows\OfflineMapDownloader.AssemblyInfo.cs
+C:\Work\old\OfflineMapDownloader\OfflineMapDownloader\obj\Debug\net5.0-windows\OfflineMapDownloader.csproj.CoreCompileInputs.cache
+C:\Work\old\OfflineMapDownloader\OfflineMapDownloader\obj\Debug\net5.0-windows\OfflineMapDownloader.dll
+C:\Work\old\OfflineMapDownloader\OfflineMapDownloader\obj\Debug\net5.0-windows\ref\OfflineMapDownloader.dll
+C:\Work\old\OfflineMapDownloader\OfflineMapDownloader\obj\Debug\net5.0-windows\OfflineMapDownloader.pdb
+C:\Work\old\OfflineMapDownloader\OfflineMapDownloader\obj\Debug\net5.0-windows\OfflineMapDownloader.genruntimeconfig.cache
+D:\Work\OfflineMapDownloader\OfflineMapDownloader\bin\Debug\net5.0-windows\OfflineMapDownloader.exe
+D:\Work\OfflineMapDownloader\OfflineMapDownloader\bin\Debug\net5.0-windows\OfflineMapDownloader.deps.json
+D:\Work\OfflineMapDownloader\OfflineMapDownloader\bin\Debug\net5.0-windows\OfflineMapDownloader.runtimeconfig.json
+D:\Work\OfflineMapDownloader\OfflineMapDownloader\bin\Debug\net5.0-windows\OfflineMapDownloader.runtimeconfig.dev.json
+D:\Work\OfflineMapDownloader\OfflineMapDownloader\bin\Debug\net5.0-windows\OfflineMapDownloader.dll
+D:\Work\OfflineMapDownloader\OfflineMapDownloader\bin\Debug\net5.0-windows\OfflineMapDownloader.pdb
+D:\Work\OfflineMapDownloader\OfflineMapDownloader\obj\Debug\net5.0-windows\OfflineMapDownloader.csproj.GenerateResource.cache
+D:\Work\OfflineMapDownloader\OfflineMapDownloader\obj\Debug\net5.0-windows\OfflineMapDownloader.GeneratedMSBuildEditorConfig.editorconfig
+D:\Work\OfflineMapDownloader\OfflineMapDownloader\obj\Debug\net5.0-windows\OfflineMapDownloader.AssemblyInfoInputs.cache
+D:\Work\OfflineMapDownloader\OfflineMapDownloader\obj\Debug\net5.0-windows\OfflineMapDownloader.AssemblyInfo.cs
+D:\Work\OfflineMapDownloader\OfflineMapDownloader\obj\Debug\net5.0-windows\OfflineMapDownloader.csproj.CoreCompileInputs.cache
+D:\Work\OfflineMapDownloader\OfflineMapDownloader\obj\Debug\net5.0-windows\OfflineMapDownloader.dll
+D:\Work\OfflineMapDownloader\OfflineMapDownloader\obj\Debug\net5.0-windows\ref\OfflineMapDownloader.dll
+D:\Work\OfflineMapDownloader\OfflineMapDownloader\obj\Debug\net5.0-windows\OfflineMapDownloader.pdb
+D:\Work\OfflineMapDownloader\OfflineMapDownloader\obj\Debug\net5.0-windows\OfflineMapDownloader.genruntimeconfig.cache
+D:\Work\OfflineMapDownloader\OfflineMapDownloader\obj\Debug\net5.0-windows\OfflineMapDownloader.csproj.AssemblyReference.cache
+D:\Work\OfflineMapDownloader\OfflineMapDownloader\obj\Debug\net5.0-windows\refint\OfflineMapDownloader.dll
+D:\Work\OfflineMapDownloader\OfflineMapDownloader\obj\Debug\net5.0-windows\OfflineMapDownloader.Properties.Resources.resources
+D:\Work\OfflineMapDownloader\OfflineMapDownloader\bin\Debug\net5.0-windows\Newtonsoft.Json.dll
+D:\Work\OfflineMapDownloader\OfflineMapDownloader\obj\Debug\net5.0-windows\OfflineMapDownloader.csproj.CopyComplete
+W:\Work\OSM Offline Reader\OfflineMapDownloader\obj\Debug\net5.0-windows\OfflineMapDownloader.csproj.AssemblyReference.cache
+W:\Work\OSM Offline Reader\OfflineMapDownloader\obj\Debug\net5.0-windows\OfflineMapDownloader.Form1.resources
+W:\Work\OSM Offline Reader\OfflineMapDownloader\obj\Debug\net5.0-windows\OfflineMapDownloader.Properties.Resources.resources
+W:\Work\OSM Offline Reader\OfflineMapDownloader\obj\Debug\net5.0-windows\OfflineMapDownloader.csproj.GenerateResource.cache
+W:\Work\OSM Offline Reader\OfflineMapDownloader\obj\Debug\net5.0-windows\OfflineMapDownloader.GeneratedMSBuildEditorConfig.editorconfig
+W:\Work\OSM Offline Reader\OfflineMapDownloader\obj\Debug\net5.0-windows\OfflineMapDownloader.AssemblyInfoInputs.cache
+W:\Work\OSM Offline Reader\OfflineMapDownloader\obj\Debug\net5.0-windows\OfflineMapDownloader.AssemblyInfo.cs
+W:\Work\OSM Offline Reader\OfflineMapDownloader\obj\Debug\net5.0-windows\OfflineMapDownloader.csproj.CoreCompileInputs.cache
+W:\Work\OSM Offline Reader\OfflineMapDownloader\bin\Debug\net5.0-windows\OfflineMapDownloader.exe
+W:\Work\OSM Offline Reader\OfflineMapDownloader\bin\Debug\net5.0-windows\OfflineMapDownloader.deps.json
+W:\Work\OSM Offline Reader\OfflineMapDownloader\bin\Debug\net5.0-windows\OfflineMapDownloader.runtimeconfig.json
+W:\Work\OSM Offline Reader\OfflineMapDownloader\bin\Debug\net5.0-windows\OfflineMapDownloader.runtimeconfig.dev.json
+W:\Work\OSM Offline Reader\OfflineMapDownloader\bin\Debug\net5.0-windows\OfflineMapDownloader.dll
+W:\Work\OSM Offline Reader\OfflineMapDownloader\bin\Debug\net5.0-windows\OfflineMapDownloader.pdb
+W:\Work\OSM Offline Reader\OfflineMapDownloader\bin\Debug\net5.0-windows\Newtonsoft.Json.dll
+W:\Work\OSM Offline Reader\OfflineMapDownloader\obj\Debug\net5.0-windows\OfflineMapDownloader.csproj.CopyComplete
+W:\Work\OSM Offline Reader\OfflineMapDownloader\obj\Debug\net5.0-windows\OfflineMapDownloader.dll
+W:\Work\OSM Offline Reader\OfflineMapDownloader\obj\Debug\net5.0-windows\refint\OfflineMapDownloader.dll
+W:\Work\OSM Offline Reader\OfflineMapDownloader\obj\Debug\net5.0-windows\OfflineMapDownloader.pdb
+W:\Work\OSM Offline Reader\OfflineMapDownloader\obj\Debug\net5.0-windows\OfflineMapDownloader.genruntimeconfig.cache
+W:\Work\OSM Offline Reader\OfflineMapDownloader\obj\Debug\net5.0-windows\ref\OfflineMapDownloader.dll
+D:\Work\OfflineMapDownloader\OfflineMapDownloader\obj\Debug\net5.0-windows\OfflineMapDownloader.OfflineTileReaderForm.resources
