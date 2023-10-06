@@ -153,6 +153,7 @@ namespace OfflineMapDownloader
                 FileExtention = extensionTextBox.Text,
                 CallbackFunction = readTileCallback,
                 Delay = int.Parse(delayTextBox.Text),
+                BatchSize = int.Parse( maxLimitTextBox.Text) ,
                 Log = currentParameters?.Log ?? new Dictionary<ulong, string>(),
                 MapUrl = mapUrlTextBox.Text
             };
@@ -235,6 +236,7 @@ namespace OfflineMapDownloader
                 currentParameters = JsonConvert.DeserializeObject<ReadMapTileParam>(json) ?? new ReadMapTileParam();
                 outputTextBox.Text = currentParameters.OutputPath;
                 delayTextBox.Text = currentParameters.Delay.ToString();
+                maxLimitTextBox.Text = currentParameters.BatchSize.ToString();
                 mongoDBTextBox.Text = currentParameters.MongoDBSetting;
                 mapProfileComboBox.Text = currentParameters.MapName;
                 currentParameters.CallbackFunction = readTileCallback;
